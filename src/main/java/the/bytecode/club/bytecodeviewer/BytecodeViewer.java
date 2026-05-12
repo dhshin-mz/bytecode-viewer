@@ -157,17 +157,17 @@ public class BytecodeViewer
      *
      * @param args files you want to open or CLI
      */
-    public static void main(String[] args)
+    void main(String[] args)
     {
         launchArgs = args;
 
         //CLI startup banner
-        System.out.print("Bytecode Viewer " + VERSION);
+        IO.print("Bytecode Viewer " + VERSION);
 
         if (FAT_JAR)
-            System.out.print(" [Fat Jar]");
+            IO.print(" [Fat Jar]");
 
-        System.out.println(" - https://bytecodeviewer.com\r\nCreated by @Konloch - https://konloch.com\r\nPresented by https://the.bytecode.club");
+        IO.println(" - https://bytecodeviewer.com\r\nCreated by @Konloch - https://konloch.com\r\nPresented by https://the.bytecode.club");
 
         // Set the security manager
         // Note: SecurityManager is deprecated for removal in modern Java.
@@ -272,7 +272,7 @@ public class BytecodeViewer
         viewer.setVisible(true);
 
         //print startup time
-        System.out.println("Start up took " + ((System.currentTimeMillis() - Configuration.BOOT_TIMESTAMP) / 1000) + " seconds");
+        IO.println("Start up took " + ((System.currentTimeMillis() - Configuration.BOOT_TIMESTAMP) / 1000) + " seconds");
 
         //request focus on GUI for hotkeys on start
         viewer.requestFocus();
@@ -483,7 +483,7 @@ public class BytecodeViewer
         {
             return compile(false, false);
         }
-        catch (NullPointerException ignored)
+        catch (NullPointerException _)
         {
             return false;
         }
@@ -503,9 +503,8 @@ public class BytecodeViewer
 
         for (java.awt.Component c : BytecodeViewer.viewer.workPane.getLoadedViewers())
         {
-            if (c instanceof ClassViewer)
+            if (c instanceof ClassViewer cv)
             {
-                ClassViewer cv = (ClassViewer) c;
 
                 if (noErrors && !cv.bytecodeViewPanel1.compile())
                     noErrors = false;
@@ -783,7 +782,7 @@ public class BytecodeViewer
         {
             FileUtils.deleteDirectory(tempF);
         }
-        catch (Exception ignored)
+        catch (Exception _)
         {
         }
 
